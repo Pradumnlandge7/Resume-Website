@@ -1,0 +1,123 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #212529; /* Default text color, will be overridden by Tailwind classes or specific styles */
+}
+
+.hero {
+    background: linear-gradient(to right, #f97316, #ea580c); /* Orange gradient */
+}
+
+.section {
+    padding: 4rem 1rem;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typing effect for objective */
+.typing-text {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: .15em solid orange;
+    animation:
+        typing 3.5s steps(40, end) forwards,
+        blink-caret .75s step-end infinite;
+}
+
+/* The typing animation */
+@keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
+}
+
+/* The caret blinking animation */
+@keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent
+    }
+    50% {
+        border-color: orange;
+    }
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 450px;
+    max-height: 50vh;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 50px;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 18px;
+    height: 100%;
+    width: 4px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-item:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: -32px; /* Adjust to align with the line */
+    top: 5px;
+    background-color: white;
+    border: 4px solid #f97316; /* Orange border */
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f97316; /* Orange background */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    opacity: 0.8;
+}
