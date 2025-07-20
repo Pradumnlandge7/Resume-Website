@@ -15,20 +15,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Typing effect function - Fixed version
+// Typing effect function - Completely rewritten for better performance
 let isTyping = false;
-let currentTimeout = null;
+let typingInterval = null;
 
-function typeWriter(text, element, speed) {
+function typeWriter(text, element, speed = 30) {
     // Prevent multiple typing effects running simultaneously
     if (isTyping) {
         return;
     }
     
-    // Clear any existing timeout
-    if (currentTimeout) {
-        clearTimeout(currentTimeout);
-        currentTimeout = null;
+    // Clear any existing interval
+    if (typingInterval) {
+        clearInterval(typingInterval);
+        typingInterval = null;
+    }
+    
+    if (!element || !text) {
+        return;
     }
     
     isTyping = true;
@@ -37,19 +41,19 @@ function typeWriter(text, element, speed) {
     
     let charIndex = 0;
     
-    function type() {
+    // Use setInterval instead of setTimeout for more reliable timing
+    typingInterval = setInterval(() => {
         if (charIndex < text.length) {
             element.textContent += text.charAt(charIndex);
             charIndex++;
-            currentTimeout = setTimeout(type, speed);
         } else {
+            // Typing complete
+            clearInterval(typingInterval);
+            typingInterval = null;
             element.classList.remove('typing-text');
             isTyping = false;
-            currentTimeout = null;
         }
-    }
-    
-    type();
+    }, speed);
 }
 
 // Initialize typing effect on About section when it's in view
@@ -59,24 +63,26 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && entry.target.id === 'about' && !hasTyped) {
             hasTyped = true;
-            // Small delay to ensure element is ready
+            // Delay to ensure smooth animation
             setTimeout(() => {
                 if (aboutTextElement) {
-                    typeWriter(aboutFullText, aboutTextElement, 30);
+                    typeWriter(aboutFullText, aboutTextElement, 50); // Slower speed for better visibility
                 }
-            }, 100);
+            }, 200);
             observer.unobserve(entry.target); // Stop observing once typed
         }
     });
 }, { 
-    threshold: 0.5,
-    rootMargin: '0px 0px -10% 0px' // Trigger slightly before reaching 50%
+    threshold: 0.3, // Reduced threshold for earlier trigger
+    rootMargin: '0px 0px -20% 0px' // Trigger earlier
 });
 
 // Only observe if the about section exists
 const aboutSection = document.getElementById('about');
 if (aboutSection && aboutTextElement) {
     observer.observe(aboutSection);
+} else {
+    console.warn('About section or aboutText element not found');
 }
 
 // Experience timeline toggle
@@ -269,18 +275,23 @@ if (projectModal) {
     });
 }
 
-// Initial call for skills chart - wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', () => {
-    renderSkillsChart();
-});
+// Initialize skills chart when DOM is ready
+function initializeSkillsChart() {
+    // Wait a bit for Chart.js to be fully loaded
+    setTimeout(() => {
+        if (typeof Chart !== 'undefined') {
+            renderSkillsChart();
+        } else {
+            console.error('Chart.js not loaded');
+        }
+    }, 100);
+}
 
-// If DOM is already loaded, call immediately
+// Check DOM ready state
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        renderSkillsChart();
-    });
+    document.addEventListener('DOMContentLoaded', initializeSkillsChart);
 } else {
-    renderSkillsChart();
+    initializeSkillsChart();
 }
 
 // Scroll to Top button logic
@@ -338,3 +349,13 @@ if (copyEmailBtn && copyMessage) {
         }
     });
 }
+
+// Clean up on page unload
+window.addEventListener('beforeunload', () => {
+    if (typingInterval) {
+        clearInterval(typingInterval);
+    }
+    if (observer) {
+        observer.disconnect();
+    }
+});
