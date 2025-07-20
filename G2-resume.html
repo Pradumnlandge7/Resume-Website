@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pradumn Landge - Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #f97316;
+        }
+
+        .hero {
+            background: linear-gradient(to right, #f97316, #ea580c);
+        }
+
+        .section {
+            padding: 4rem 1rem;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Typing effect for objective */
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid orange;
+            animation:
+                typing 3.5s steps(40, end) forwards,
+                blink-caret .75s step-end infinite;
+        }
+
+        /* The typing animation */
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        /* The caret blinking animation */
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: orange;
+            }
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 450px;
+            max-height: 50vh;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 18px;
+            height: 100%;
+            width: 4px;
+            background: #dee2e6;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: -32px;
+            /* Adjust to align with the line */
+            top: 5px;
+            background-color: white;
+            border: 4px solid #f97316;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f97316;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            /* Hidden by default */
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-to-top:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Hero Section -->
+    <section class="hero text-white py-20 px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Hi, I'm Pradumn Landge</h1>
+        <p class="text-lg md:text-xl mb-6">Full Stack Developer | AI/ML Enthusiast | DevOps Certified</p>
+        <a href="#contact"
+            class="bg-white text-orange-600 font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition-colors duration-300">Let's
+            Connect</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-white fade-in">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">About Me</h2>
+            <p id="aboutText" class="text-gray-600 text-lg leading-relaxed"></p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section bg-gray-100 fade-in">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Work Experience</h2>
+            <p class="mb-8 text-gray-600 text-center">This section provides an interactive timeline of my professional
+                journey. Click on any role to see the detailed responsibilities and achievements associated with it.
+                This format helps visualize my career progression and allows a deeper dive into my contributions at each
+                stage.</p>
+            <div class="relative timeline">
+                <!-- Management Trainee -->
+                <div class="timeline-item bg-white p-6 rounded-lg shadow-sm mb-8 cursor-pointer"
+                    onclick="toggleDetails('exp1')">
+                    <h3 class="text-xl font-semibold text-orange-600">Management Trainee</h3>
+                    <p class="font-medium">NeML (National e-Markets Limited) | Nagpur, MH</p>
+                    <p class="text-sm text-gray-500">July 2025 – Present</p>
+                    <div id="exp1" class="hidden mt-4 pt-4 border-t border-gray-200">
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Currently transitioning into a management trainee role, focusing on understanding
+                                business operations, project management, and cross-functional team collaboration within
+                                a software development company.</li>
+                            <li>Contributing to strategic initiatives and process improvements to enhance product
+                                delivery and team efficiency.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Java Full Stack Intern -->
+                <div class="timeline-item bg-white p-6 rounded-lg shadow-sm mb-8 cursor-pointer"
+                    onclick="toggleDetails('exp2')">
+                    <h3 class="text-xl font-semibold text-orange-600">Java Full Stack Software Developer Intern</h3>
+                    <p class="font-medium">NeML (National e-Markets Limited) | Nagpur, MH</p>
+                    <p class="text-sm text-gray-500">January 2025 – June 2025</p>
+                    <div id="exp2" class="hidden mt-4 pt-4 border-t border-gray-200">
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Developed and maintained robust backend services using Java and Spring Boot,
+                                implementing RESTful APIs for various application functionalities.</li>
+                            <li>Designed and managed database schemas (MySQL/MongoDB) and integrated them with
+                                application logic using ORM frameworks like Hibernate/JPA.</li>
+                            <li>Contributed to frontend development using modern JavaScript frameworks (e.g., React.js),
+                                ensuring responsive and user-friendly interfaces.</li>
+                            <li>Participated in agile development cycles, including sprint planning, daily stand-ups,
+                                and code reviews, ensuring high-quality and timely delivery of features.</li>
+                            <li>Utilized Git for version control and collaborated effectively with team members on a
+                                shared codebase.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section bg-white fade-in">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Technical Skills</h2>
+            <p class="mb-8 text-gray-600 text-center">My technical abilities are visualized in the chart below. This
+                provides a clear overview of my proficiency across different technology domains. You can use the buttons
+                to filter the chart and focus on specific categories, such as Programming Languages or Frameworks, for a
+                more targeted assessment of my skills.</p>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <div class="flex flex-wrap justify-center gap-2 mb-6">
+                    <button
+                        class="skill-filter-btn bg-orange-600 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-700 transition-colors duration-200"
+                        data-category="all">All</button>
+                    <button
+                        class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors duration-200"
+                        data-category="languages">Languages</button>
+                    <button
+                        class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors duration-200"
+                        data-category="aiml">AIML</button>
+                    <button
+                        class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors duration-200"
+                        data-category="frameworks">Frameworks & Libraries</button>
+                    <button
+                        class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors duration-200"
+                        data-category="databases">Databases</button>
+                    <button
+                        class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors duration-200"
+                        data-category="tools">Tools & Concepts</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section bg-gray-100 fade-in">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Projects</h2>
+            <p class="mb-8 text-gray-600 text-center">This gallery showcases a selection of my projects, reflecting my
+                skills in full-stack development, AI/ML, and UI/UX design. Each card provides a brief overview and a
+                visual representation. Click the "Details" button to learn more about the project's objectives and
+                technologies used, or use the "Live Demo" link to interact with the application directly.</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Project Card 1: AI-Driven Student Chatbot -->
+                <div
+                    class="bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div
+                        class="w-full h-48 bg-orange-500 rounded-t-xl mb-4 flex items-center justify-center text-white text-xl font-bold">
+                        AI Chatbot</div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2">AI-Driven Student Chatbot</h3>
+                        <p class="text-gray-600 text-sm mb-4">AI-powered chatbot providing instant academic information
+                            to students.</p>
+                        <button class="project-details-btn text-orange-600 font-semibold hover:underline"
+                            data-project="chatbot">Details →</button>
+                    </div>
+                </div>
+                <!-- Project Card 2: E-Commerce Website -->
+                <div
+                    class="bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div
+                        class="w-full h-48 bg-orange-500 rounded-t-xl mb-4 flex items-center justify-center text-white text-xl font-bold">
+                        E-Commerce UI</div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2">E-Commerce Website</h3>
+                        <p class="text-gray-600 text-sm mb-4">A full-stack e-commerce platform with comprehensive
+                            shopping functionalities.</p>
+                        <div class="flex justify-between items-center">
+                            <button class="project-details-btn text-orange-600 font-semibold hover:underline"
+                                data-project="ecommerce">Details →</button>
+                            <a href="https://trendbuybypradumn.netlify.app" target="_blank"
+                                class="text-sm bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-600 transition-colors duration-200">Live
+                                Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 3: Intelligent Portfolio Website -->
+                <div
+                    class="bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div
+                        class="w-full h-48 bg-orange-500 rounded-t-xl mb-4 flex items-center justify-center text-white text-xl font-bold">
+                        Portfolio Design</div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2">Intelligent Portfolio Website</h3>
+                        <p class="text-gray-600 text-sm mb-4">My personal portfolio website to showcase my skills and
+                            projects dynamically.</p>
+                        <div class="flex justify-between items-center">
+                            <button class="project-details-btn text-orange-600 font-semibold hover:underline"
+                                data-project="portfolio">Details →</button>
+                            <a href="https://pradumnlandge.netlify.app" target="_blank"
+                                class="text-sm bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-600 transition-colors duration-200">Live
+                                Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications Section -->
+    <section id="education" class="section bg-white fade-in">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Education -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6 border-b pb-2">Education</h2>
+                <p class="mb-6 text-gray-600">My academic journey has provided a strong foundation in computer science
+                    and engineering, with a specialization in AI/ML.</p>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm mb-4">
+                    <h3 class="font-bold text-lg">Bachelor of Technology in CS & Engg (AI/ML)</h3>
+                    <p class="font-medium text-gray-700">Yeshwantrao Chavan College of Engineering, Nagpur</p>
+                    <p class="text-sm text-gray-500">2022 – Present</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-lg">Computer Engineering Diploma</h3>
+                    <p class="font-medium text-gray-700">Government Polytechnic, Ahmednagar</p>
+                    <p class="text-sm text-gray-500">2019 – 2022</p>
+                </div>
+            </div>
+            <!-- Certifications -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6 border-b pb-2">Certifications</h2>
+                <p class="mb-6 text-gray-600">These certifications demonstrate my commitment to continuous learning and
+                    expertise in key industry technologies.</p>
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center">
+                        <span class="text-2xl mr-4">📜</span>
+                        <div>
+                            <h3 class="font-semibold">DevOps On AWS</h3>
+                            <p class="text-sm text-gray-600">AWS Coursera</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center">
+                        <span class="text-2xl mr-4">📜</span>
+                        <div>
+                            <h3 class="font-semibold">DSA with Python</h3>
+                            <p class="text-sm text-gray-600">Coursera</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center">
+                        <span class="text-2xl mr-4">📜</span>
+                        <div>
+                            <h3 class="font-semibold">Flutter App Development</h3>
+                            <p class="text-sm text-gray-600">Value Added Course (YCCE)</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center">
+                        <span class="text-2xl mr-4">📜</span>
+                        <div>
+                            <h3 class="font-semibold">Data Analytics Using Excel</h3>
+                            <p class="text-sm text-gray-600">Value Added Course (YCCE)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-gray-100 fade-in">
+        <div class="max-w-xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">Contact Me</h2>
+            <p class="text-gray-600 mb-6">Let's work together or just say hello! Feel free to reach out through any of
+                the channels below.</p>
+            <div class="space-y-4">
+                <p class="flex items-center justify-center text-lg">
+                    <span class="mr-3">📧</span> pradumn7028@gmail.com
+                    <button id="copyEmailBtn"
+                        class="ml-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full hover:bg-orange-600 transition-colors duration-200">Copy</button>
+                </p>
+                <div id="copyMessage" class="text-center text-sm text-green-600 mt-2 hidden">Email copied!</div>
+                <p class="flex items-center justify-center text-lg">📞 7028876440</p>
+                <p class="flex items-center justify-center text-lg">
+                    🔗 <a href="https://linkedin.com/in/pradumn-b-landge-982a9925b" target="_blank"
+                        class="text-orange-600 hover:underline">LinkedIn Profile</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl transform transition-all duration-300 scale-95">
+            <div class="p-6 relative">
+                <button id="closeModalBtn"
+                    class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+                <h3 id="modalTitle" class="text-2xl font-bold mb-4"></h3>
+                <p id="modalDescription" class="text-gray-700 mb-4"></p>
+                <h4 class="font-semibold mb-2">Technologies Used:</h4>
+                <div id="modalTech" class="flex flex-wrap gap-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="scroll-to-top">⬆️</button>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const aboutTextElement = document.getElementById('aboutText');
+        const aboutFullText = "I’m a software developer passionate about crafting efficient, scalable applications. With a solid foundation in Java Full Stack Development and a focus on AI/ML, I’m currently growing my skills in leadership as a Management Trainee at NeML. My goal is to leverage technology to solve complex problems and contribute to innovative solutions.";
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Typing effect function
+        let charIndex = 0;
+        function typeWriter(text, element, speed) {
+            element.textContent = ''; // Clear existing text
+            element.classList.add('typing-text');
+            charIndex = 0;
+            function type() {
+                if (charIndex < text.length) {
+                    element.textContent += text.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, speed);
+                } else {
+                    element.classList.remove('typing-text');
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on About section when it's in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.id === 'about') {
+                    typeWriter(aboutFullText, aboutTextElement, 30);
+                    observer.unobserve(entry.target); // Stop observing once typed
+                }
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+
+        observer.observe(document.getElementById('about'));
+
+        // Experience timeline toggle
+        function toggleDetails(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('hidden');
+        }
+
+        // Skills Chart
+        const skillsData = {
+            languages: [
+                { skill: 'Java', level: 90 },
+                { skill: 'Python', level: 85 },
+                { skill: 'JavaScript', level: 80 },
+                { skill: 'HTML/CSS', level: 95 }
+            ],
+            aiml: [
+                { skill: 'Machine Learning', level: 85 },
+                { skill: 'Deep Learning', level: 80 },
+                { skill: 'Natural Language Processing', level: 75 },
+                { skill: 'Computer Vision', level: 70 },
+                { skill: 'AI Chatbots', level: 80 }
+            ],
+            frameworks: [
+                { skill: 'Spring Boot', level: 85 },
+                { skill: 'Angular', level: 75 },
+                { skill: 'Node.js', level: 70 },
+                { skill: 'Hibernate/JPA', level: 80 }
+            ],
+            databases: [
+                { skill: 'MySQL', level: 85 },
+                { skill: 'MongoDB', level: 75 }
+            ],
+            tools: [
+                { skill: 'AWS', level: 70 },
+                { skill: 'Git', level: 90 },
+                { skill: 'RESTful APIs', level: 90 },
+                { skill: 'Agile', level: 85 },
+                { skill: 'Microservices', level: 70 }
+            ]
+            
+        };
+
+
+        let skillsChart;
+        function renderSkillsChart(category = 'all') {
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            let dataToShow = [];
+
+            if (category === 'all') {
+                dataToShow = Object.values(skillsData).flat();
+            } else {
+                dataToShow = skillsData[category];
+            }
+
+            const labels = dataToShow.map(s => s.skill);
+            const data = dataToShow.map(s => s.level);
+
+            if (skillsChart) {
+                skillsChart.destroy();
+            }
+
+            skillsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Proficiency Level',
+                        data: data,
+                        backgroundColor: '#f97316',
+                        borderColor: 'rgba(13, 110, 253, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `Proficiency: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function (value) { return value + "%" }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                autoSkip: false,
+                                callback: function (value, index, values) {
+                                    let label = this.getLabelForValue(value);
+                                    return label.length > 16 ? label.substring(0, 16) + '...' : label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.querySelectorAll('.skill-filter-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                document.querySelectorAll('.skill-filter-btn').forEach(btn => btn.classList.replace('bg-orange-600', 'bg-gray-200').replace('text-white', 'text-gray-700'));
+                e.target.classList.replace('bg-gray-200', 'bg-orange-600').replace('text-gray-700', 'text-white');
+                renderSkillsChart(e.target.dataset.category);
+            });
+        });
+
+        // Project Modal
+        const projectDetails = {
+            chatbot: {
+                title: 'AI-Driven Student Information Provider CHATBOT',
+                description: 'This project involved creating an intelligent chatbot to streamline access to student-related information. The chatbot can handle various queries regarding academic schedules, campus facilities, and general information, reducing the workload on administrative staff and providing instant support to students.',
+                tech: ['Python', 'NLTK', 'TensorFlow', 'AI/ML']
+            },
+            ecommerce: {
+                title: 'E-Commerce Website',
+                description: 'A comprehensive, full-stack e-commerce platform built from the ground up. The application features user authentication, product catalogs, a shopping cart, and a checkout process. The backend is powered by a robust API to manage products, users, and orders.',
+                tech: ['Java', 'Spring Boot', 'React.js', 'MySQL', 'RESTful APIs']
+            },
+            portfolio: {
+                title: 'Intelligent Portfolio Website',
+                description: 'A personal portfolio designed not just to list my projects, but to intelligently showcase my skills and journey. It uses modern web technologies to create a dynamic and engaging user experience, much like the one you are currently viewing.',
+                tech: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS']
+            }
+        };
+
+        const projectModal = document.getElementById('projectModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalTech = document.getElementById('modalTech');
+
+        document.querySelectorAll('.project-details-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const projectKey = button.dataset.project;
+                const details = projectDetails[projectKey];
+
+                modalTitle.textContent = details.title;
+                modalDescription.textContent = details.description;
+                modalTech.innerHTML = details.tech.map(t => `<span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">${t}</span>`).join('');
+
+                projectModal.classList.remove('hidden');
+                projectModal.classList.add('flex');
+                setTimeout(() => projectModal.querySelector('div').classList.remove('scale-95'), 10);
+            });
+        });
+
+        function closeModal() {
+            projectModal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                projectModal.classList.add('hidden');
+                projectModal.classList.remove('flex');
+            }, 300);
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                closeModal();
+            }
+        });
+
+        // Initial call for skills chart
+        renderSkillsChart();
+
+        // Scroll to Top button logic
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling 300px
+                scrollToTopBtn.style.display = 'block';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Copy Email button logic
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        const copyMessage = document.getElementById('copyMessage');
+
+        copyEmailBtn.addEventListener('click', () => {
+            const email = 'pradumn7028@gmail.com';
+            const textArea = document.createElement('textarea');
+            textArea.value = email;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            copyMessage.classList.remove('hidden');
+            setTimeout(() => {
+                copyMessage.classList.add('hidden');
+            }, 2000);
+        });
+
+    </script>
+</body>
+
+</html>
